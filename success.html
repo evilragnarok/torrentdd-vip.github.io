@@ -3,13 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>สำเร็จ</title>
+
 <meta http-equiv="refresh" content="5;url=index.html">
+
 <style>
 body {
   font-family: "Segoe UI", Tahoma, sans-serif;
   background: linear-gradient(135deg, #e9f7ef, #fdfefe);
   padding: 40px;
 }
+
 .box {
   max-width: 420px;
   margin: auto;
@@ -17,13 +20,24 @@ body {
   padding: 30px;
   border-radius: 16px;
   text-align: center;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 </style>
+
+<script>
+let t = 5;
+setInterval(() => {
+  t--;
+  document.getElementById("time").innerText = t;
+}, 1000);
+</script>
 </head>
+
 <body>
 <div class="box">
   <h2>✅ ส่งข้อมูลเรียบร้อย</h2>
   <p>กรุณารอทีมงานตรวจสอบ</p>
+  <p>กลับสู่หน้าแรกใน <b><span id="time">5</span></b> วินาที</p>
 </div>
 </body>
 </html>
