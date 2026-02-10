@@ -3,18 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ซื้อ VIP - Coin Code TorrentDD</title>
+<title>ซื้อ VIP - Coin TorrentDD</title>
 
 <style>
 :root {
   --bg-main: linear-gradient(135deg, #e9f7ef, #fdfefe);
-  --card-bg: #ffffff;
-  --text-main: #222;
-  --text-muted: #777;
+  --card-bg: #fff;
   --primary: #28a745;
   --primary-dark: #1e8449;
   --border: #ccc;
-  --payment-bg: #f4fbf7;
 }
 
 * { box-sizing: border-box; }
@@ -24,16 +21,15 @@ body {
   padding: 1rem;
   font-family: "Segoe UI", Tahoma, sans-serif;
   background: var(--bg-main);
-  color: var(--text-main);
 }
 
 .box {
-  max-width: 32rem;
+  max-width: 420px;
   margin: auto;
   background: var(--card-bg);
   padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  border-radius: 16px;
+  box-shadow: 0 15px 30px rgba(0,0,0,.15);
 }
 
 h2 {
@@ -41,33 +37,25 @@ h2 {
   color: var(--primary-dark);
 }
 
-.subtitle {
-  text-align: center;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-}
-
 label {
-  margin-top: 0.8rem;
+  margin-top: 12px;
   display: block;
   font-weight: bold;
 }
 
 input, select {
   width: 100%;
-  padding: 0.7rem;
-  margin-top: 0.4rem;
-  border-radius: 0.6rem;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 10px;
   border: 1px solid var(--border);
-  font-size: 1rem;
 }
 
 button {
   width: 100%;
-  margin-top: 1rem;
-  padding: 0.8rem;
-  border-radius: 0.7rem;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 12px;
   border: none;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: #fff;
@@ -75,40 +63,28 @@ button {
   cursor: pointer;
 }
 
-button:disabled {
-  background: #aaa;
-}
+button:disabled { background: #aaa; }
 
 .payment-box {
-  margin-top: 1.2rem;
-  background: var(--payment-bg);
+  margin-top: 16px;
+  background: #f4fbf7;
+  padding: 12px;
   border-left: 5px solid var(--primary);
-  padding: 1rem;
-  border-radius: 0.7rem;
-  font-size: 0.9rem;
-}
-
-.highlight {
-  font-weight: bold;
-  color: var(--primary-dark);
+  border-radius: 10px;
+  font-size: 14px;
 }
 
 .payment-img img {
   width: 100%;
-  margin-top: 1rem;
-  border-radius: 0.6rem;
+  margin-top: 10px;
+  border-radius: 10px;
 }
 
-.contact-box {
-  margin-top: 1rem;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.contact-box a {
-  color: var(--primary-dark);
-  text-decoration: none;
-  font-weight: bold;
+#preview {
+  display: none;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
 }
 </style>
 </head>
@@ -116,109 +92,136 @@ button:disabled {
 <body>
 
 <div class="box">
-  <h2>💎 ซื้อ VIP - Coin TorrentDD Code 💎</h2>
-  <div class="subtitle">โอนเงิน → อัปโหลดสลิป → แจ้งชำระเงิน</div>
+<h2>💎 ซื้อ VIP / Coin TorrentDD</h2>
 
-  <form id="payForm">
-    <label>📦 เลือกแพ็กเกจ</label>
-    <select name="package" required>
-      <option>VIP 1 เดือน - 200 บาท</option>
-      <option>VIP 3 เดือน - 425 บาท</option>
-      <option>VIP 6 เดือน - 750 บาท</option>
-      <option>VIP 1 ปี - 1250 บาท</option>
-      <option>VIP 2 ปี - 2050 บาท</option>
-      <option>Coin 1,200 - 200 บาท</option>
-      <option>Coin 3,000 - 425 บาท</option>
-      <option>Coin 5,000 - 750 บาท</option>
-      <option>Coin 9,000 - 1250 บาท</option>
-      <option>Coin 15,000 - 2050 บาท</option>
-      <option>Donation</option>
-    </select>
+<form id="payForm">
 
-    <label>👤 User In TorrentDD</label>
-    <input type="text" name="username" required>
+  <!-- 📦 PACKAGE (ครบทุกตัว) -->
+  <label>📦 เลือกแพ็กเกจ</label>
+  <select name="package" required>
+    <option value="" disabled selected>-- กรุณาเลือกแพ็กเกจ --</option>
 
-    <label>🖼 อัปโหลดรูปสลิปโอนเงิน</label>
-    <input type="file" name="slip" accept="image/*" required>
+    <option>VIP 1 เดือน - 200 บาท</option>
+    <option>VIP 3 เดือน - 425 บาท</option>
+    <option>VIP 6 เดือน - 750 บาท</option>
+    <option>VIP 1 ปี - 1250 บาท</option>
+    <option>VIP 2 ปี - 2050 บาท</option>
 
-    <button id="sendBtn" type="submit">✅ แจ้งชำระเงิน</button>
-  </form>
+    <option>Coin 1,200 - 200 บาท</option>
+    <option>Coin 3,000 - 425 บาท</option>
+    <option>Coin 5,000 - 750 บาท</option>
+    <option>Coin 9,000 - 1250 บาท</option>
+    <option>Coin 15,000 - 2050 บาท</option>
 
-  <div class="payment-box">
-    <div><span class="highlight">Bank :</span> Krungthai Bank</div>
-    <div><span class="highlight">Account :</span> 986-3-03446-0</div>
-    <div><span class="highlight">PromptPay :</span> 0910541671</div>
-    <div><span class="highlight">TrueWallet :</span> 0830439347</div>
-    <div><span class="highlight">Name :</span> Akrapong Pengrod</div>
-  </div>
+    <option>Donation</option>
+  </select>
 
-  <div class="payment-img">
-    <img src="https://s1.imgbb.ws/file/storage-sv1/giVH2.png" alt="QR Code">
-  </div>
+  <label>👤 Username TorrentDD</label>
+  <input type="text" name="username" required>
 
-  <div class="contact-box">
-    📩 ติดต่อผู้ดูแล :
-    <a href="https://www.torrentdd.com/userdetails.php?id=973308" target="_blank">
-      3vilr4gn4r0k
-    </a>
-  </div>
+  <label>🖼 อัปโหลดสลิป (ไม่เกิน 3MB)</label>
+  <input type="file" name="slip" accept="image/*" required>
+  <img id="preview">
+
+  <button id="sendBtn" type="submit">✅ แจ้งชำระเงิน</button>
+</form>
+
+<div class="payment-box">
+  <div><b>Bank:</b> Krungthai Bank</div>
+  <div><b>Account:</b> 986-3-03446-0</div>
+  <div><b>PromptPay:</b> 0910541671</div>
+  <div><b>TrueWallet:</b> 0830439347</div>
+  <div><b>Name:</b> Akrapong Pengrod</div>
+</div>
+
+<div class="payment-img">
+  <img src="https://s1.imgbb.ws/file/storage-sv1/giVH2.png" alt="QR">
+</div>
+
 </div>
 
 <script>
+/* ======================
+   🔴 ตั้งค่า Telegram
+====================== */
 const BOT_TOKEN = "8265712317:AAET88mDq8GFJSN9zRys1wJ4AwPQ7hmtYbI";
 const CHAT_ID  = "6678480860";
 
+/* กันส่งซ้ำ (reload แล้วก็กัน) */
+if (localStorage.getItem("paid")) {
+  alert("คุณได้แจ้งชำระเงินไปแล้ว");
+  document.getElementById("sendBtn").disabled = true;
+}
+
 let locked = false;
 
-document.getElementById("payForm").addEventListener("submit", async (e) => {
+/* preview รูป + จำกัดขนาด */
+document.querySelector('input[type=file]').addEventListener("change", e => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("กรุณาเลือกไฟล์รูปภาพ");
+    e.target.value = "";
+    return;
+  }
+
+  if (file.size > 3 * 1024 * 1024) {
+    alert("ไฟล์ต้องไม่เกิน 3MB");
+    e.target.value = "";
+    return;
+  }
+
+  const img = document.getElementById("preview");
+  img.src = URL.createObjectURL(file);
+  img.style.display = "block";
+});
+
+document.getElementById("payForm").addEventListener("submit", async e => {
   e.preventDefault();
   if (locked) return;
-
   locked = true;
+
   const btn = document.getElementById("sendBtn");
   btn.disabled = true;
   btn.innerText = "⏳ กำลังส่ง...";
 
   const form = e.target;
   const file = form.slip.files[0];
-
-  if (!file || !file.type.startsWith("image/")) {
-    alert("กรุณาอัปโหลดรูปสลิป");
-    resetBtn();
-    return;
-  }
+  const orderId = "ORD-" + Date.now();
 
   const caption =
 `💎 แจ้งชำระเงิน
 ━━━━━━━━━━━━━━
+🆔 Order : ${orderId}
 👤 User : ${form.username.value}
 📦 Package : ${form.package.value}
-🖼 แนบสลิป
 ⏰ เวลา : ${new Date().toLocaleString("th-TH")}`;
 
-  const tgForm = new FormData();
-  tgForm.append("chat_id", CHAT_ID);
-  tgForm.append("caption", caption);
-  tgForm.append("photo", file);
+  const data = new FormData();
+  data.append("chat_id", CHAT_ID);
+  data.append("caption", caption);
+  data.append("photo", file);
 
   try {
     const res = await fetch(
       `https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`,
-      { method: "POST", body: tgForm }
+      { method: "POST", body: data }
     );
 
     if (res.ok) {
+      localStorage.setItem("paid", "1");
       window.location.href = "success.html";
     } else {
       alert("❌ ส่งข้อมูลไม่สำเร็จ");
-      resetBtn();
+      reset();
     }
   } catch {
     alert("❌ เกิดข้อผิดพลาด");
-    resetBtn();
+    reset();
   }
 
-  function resetBtn() {
+  function reset() {
     locked = false;
     btn.disabled = false;
     btn.innerText = "✅ แจ้งชำระเงิน";
