@@ -342,6 +342,7 @@ payForm.addEventListener("submit", async e => {
   const package = f.package.options[f.package.selectedIndex].text;
   const time = new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" });
 
+  // Ensure either a slip or last 4 digits are provided
   if (!slipFile && !last4) {
     alert(getMessage("pleaseUploadOrEnter"));
     return;
@@ -361,13 +362,14 @@ payForm.addEventListener("submit", async e => {
     message += `🔢 *Last 4 Digits*: ${last4}`;
   }
 
+  // Show the "submitted" alert immediately
+  alert(getMessage("submittedSuccess"));
+
   try {
+    // Send the payment information to Telegram
     await sendToTelegram(message, slipFile);
 
-    // Show alert with countdown message
-    alert(getMessage("submittedSuccess"));
-
-    // Reset the form and page after 5 seconds
+    // Reset the form and page after a short delay
     setTimeout(() => {
       payForm.reset();
       preview.style.display = "none";
@@ -400,23 +402,40 @@ function getMessage(key) {
 
 async function sendToTelegram(message, slipFile) {
   try {
-    const formData = new FormData();
-    formData.append('chat_id', CHAT_ID);
-    formData.append('text', message);
-    if (slipFile) {
-      formData.append('document', slipFile);
+    // ส่งข้อความไปยัง Telegram
+    const formDataMessage = new FormData();
+    formDataMessage.append('chat_id', CHAT_ID);
+    formDataMessage.append('text', message);
+
+    const responseMessage = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      body: formDataMessage,
+    });
+
+    const dataMessage = await responseMessage.json();
+    console.log('Telegram response (message):', dataMessage);
+    
+    if (!dataMessage.ok) {
+      throw new Error(`Error: ${dataMessage.description}`);
     }
 
-    const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      body: formData,
-    });
-    
-    const data = await response.json();
-    console.log('Telegram response:', data);  // ตรวจสอบข้อมูลที่ตอบกลับจาก Telegram API
-    
-    if (!data.ok) {
-      throw new Error(`Error: ${data.description}`);
+    // หากมีสลิป ให้ส่งไฟล์ไปด้วย
+    if (slipFile) {
+      const formDataFile = new FormData();
+      formDataFile.append('chat_id', CHAT_ID);
+      formDataFile.append('document', slipFile);
+
+      const responseFile = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, {
+        method: 'POST',
+        body: formDataFile,
+      });
+
+      const dataFile = await responseFile.json();
+      console.log('Telegram response (file):', dataFile);
+
+      if (!dataFile.ok) {
+        throw new Error(`Error: ${dataFile.description}`);
+      }
     }
   } catch (error) {
     console.error('Error sending to Telegram:', error);  // แสดงข้อผิดพลาดที่เกิดขึ้น
