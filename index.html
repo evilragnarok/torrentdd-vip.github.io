@@ -16,6 +16,7 @@
       --dark: #27ae60;
       --border: #d1d5db;
     }
+
     body.dark {
       --bg: #0f172a;
       --card: #111827;
@@ -23,7 +24,9 @@
       --muted: #9ca3af;
       --border: #1f2937;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       padding: 1rem;
@@ -32,19 +35,23 @@
       color: var(--text);
       transition: .3s;
     }
+
     .box {
-      max-width: 560px;
+      max-width: 700px; /* ขยายกรอบให้ใหญ่ขึ้น */
+      width: 100%; /* ทำให้กรอบขยายไปเต็มพื้นที่ */
       margin: auto;
       background: var(--card);
-      padding: 1.8rem;
+      padding: 2rem; /* เพิ่ม padding */
       border-radius: 26px;
       box-shadow: 0 25px 45px rgba(0, 0, 0, .18);
     }
+
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+
     .lang-switch {
       display: flex;
       background: rgba(255, 255, 255, .65);
@@ -53,6 +60,7 @@
       padding: 4px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, .15);
     }
+
     .lang-switch button {
       border: none;
       background: transparent;
@@ -62,30 +70,36 @@
       cursor: pointer;
       color: var(--muted);
     }
+
     .lang-switch button.active {
       background: linear-gradient(135deg, var(--main), var(--dark));
       color: #fff;
       box-shadow: 0 0 12px rgba(46, 204, 113, .6);
     }
+
     .dark-toggle {
       cursor: pointer;
       font-size: 1.1rem;
       padding: 6px 10px;
       border-radius: 50%;
     }
+
     h2 {
       text-align: center;
       color: var(--dark);
     }
+
     .subtitle {
       text-align: center;
       color: var(--muted);
     }
+
     label {
       display: block;
       margin-top: 14px;
       font-weight: 500;
     }
+
     input, select {
       width: 100%;
       padding: 14px;
@@ -95,6 +109,7 @@
       background: var(--card);
       color: var(--text);
     }
+
     button {
       width: 100%;
       margin-top: 20px;
@@ -106,9 +121,11 @@
       font-weight: 600;
       cursor: pointer;
     }
+
     button:hover {
       box-shadow: 0 0 18px rgba(46, 204, 113, .55);
     }
+
     .payment-box {
       margin-top: 22px;
       background: #f0fdf4;
@@ -117,7 +134,9 @@
       border-radius: 18px;
       font-size: .9rem;
     }
+
     body.dark .payment-box { background: #022c22; }
+
     #preview {
       width: 100%;
       margin-top: 14px;
@@ -125,15 +144,66 @@
       display: none;
       border: 1px dashed var(--border);
     }
+
     .contact-box {
       margin-top: 14px;
       text-align: center;
       font-size: .85rem;
     }
+
     .contact-box a {
       color: var(--dark);
       font-weight: 500;
     }
+
+    .contact-box div {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    /* Media Queries for Responsive Design */
+    @media (max-width: 768px) {
+      .box {
+        padding: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      .lang-switch button {
+        font-size: .65rem;
+      }
+
+      button {
+        padding: 14px;
+      }
+
+      .payment-box {
+        font-size: .8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .box {
+        padding: 1rem;
+      }
+
+      h2 {
+        font-size: 1rem;
+      }
+
+      button {
+        padding: 12px;
+      }
+
+      .payment-box {
+        font-size: .7rem;
+      }
+    }
+
   </style>
 </head>
 
@@ -147,10 +217,7 @@
     </div>
     <div class="dark-toggle" onclick="toggleDark()">🌙</div>
   </div>
-
   <h2 data-th="💎 ซื้อ VIP / Coin TorrentDD" data-en="💎 Buy VIP / Coin TorrentDD"></h2>
-
-  <p class="subtitle" data-th="อัปโหลดสลิป หรือ กรอกเลข 4 ตัวท้าย" data-en="Upload payment slip or enter last 4 digits"></p>
 
   <form id="payForm">
     <label data-th="📦 เลือกแพ็กเกจ" data-en="📦 Select Package"></label>
@@ -183,23 +250,31 @@
   </form>
 
   <div class="payment-box">
-  <div style="text-align:center;margin-bottom:16px">
-    <img src="https://s1.imgbb.ws/file/storage-sv1/giVH2.png" style="width:100%;max-width:320px;border-radius:18px">
-    <div style="font-size:.8rem;color:var(--muted)" data-th="สแกนเพื่อชำระเงิน" data-en="Scan to pay"></div>
+    <div style="text-align:center;margin-bottom:16px">
+      <img src="https://s1.imgbb.ws/file/storage-sv1/giVH2.png" style="width:100%;max-width:320px;border-radius:18px">
+      <div style="font-size:.8rem;color:var(--muted)" data-th="สแกนเพื่อชำระเงิน" data-en="Scan to pay"></div>
+    </div>
+    <div>
+      <b>💳 Bank:</b> Krungthai Bank <br>
+      <b>🏦 Account:</b> 986-3-03446-0 <br>
+      <b>📱 PromptPay:</b> 0910541671 <br>
+      <b>💸 TrueWallet:</b> 0830439347 <br>
+      <b>📝 Name:</b> Akrapong Pengrod
+    </div>
   </div>
-  <div>
-    <b>💳 Bank:</b> Krungthai Bank <br>
-    <b>🏦 Account:</b> 986-3-03446-0 <br>
-    <b>📱 PromptPay:</b> 0910541671 <br>
-    <b>💸 TrueWallet:</b> 0830439347 <br>
-    <b>📝 Name:</b> Akrapong Pengrod
-  </div>
-</div>
-
 
   <div class="contact-box">
     📩 Contact :
     <a href="https://www.torrentdd.com/userdetails.php?id=973308" target="_blank">3vilr4gn4r0k</a>
+    <div data-th="🕰️ เวลาทำการ: 8:00 น. - 00:00 น. (เวลาไทย)
+    ⏰ หลังเวลา 00:01 น. - 7:59 น. หากอยู่ จะส่งให้ทันที
+    ⏰ ถ้าไม่อยู่ จะส่งให้ในเวลาทำการ"
+         data-en="
+         🕰️ Working Hours: 8:00 AM - 00:00 AM (Thailand Time)
+         ⏰ After 00:01 AM - 7:59 AM, if you are available, we will send it to you.
+         If not, we will process it during working hours.
+         ⏰ We will send it to you. If not, we will process it during working hours.
+         "></div>
   </div>
 
 </div>
@@ -254,38 +329,6 @@ slip.addEventListener("change", e => {
   };
   reader.readAsDataURL(file);
 });
-
-async function sendToTelegram(message, slipFile) {
-  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-  const body = {
-    chat_id: CHAT_ID,
-    text: message,
-    parse_mode: "Markdown"
-  };
-
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  };
-
-  try {
-    await fetch(url, requestOptions);
-
-    if (slipFile) {
-      const sendPhotoUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`;
-      const formData = new FormData();
-      formData.append('chat_id', CHAT_ID);
-      formData.append('photo', slipFile);
-      await fetch(sendPhotoUrl, {
-        method: 'POST',
-        body: formData
-      });
-    }
-  } catch (error) {
-    console.error("Error sending message to Telegram:", error);
-  }
-}
 
 payForm.addEventListener("submit", async e => {
   e.preventDefault();
