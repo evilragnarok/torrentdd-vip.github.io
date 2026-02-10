@@ -4,126 +4,135 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Buy VIP / Coin TorrentDD</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#e6f7f0;
-      --card:#ffffff;
-      --text:#1f2937;
-      --muted:#6b7280;
-      --main:#2ecc71;
-      --dark:#27ae60;
-      --border:#d1d5db;
+    :root {
+      --bg: #e6f7f0;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --main: #2ecc71;
+      --dark: #27ae60;
+      --border: #d1d5db;
     }
-    body.dark{
-      --bg:#0f172a;
-      --card:#111827;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --border:#1f2937;
+    body.dark {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      padding:1rem;
-      font-family:"Prompt",sans-serif;
-      background:linear-gradient(135deg,var(--bg),#ffffff);
-      color:var(--text);
-      transition:.3s;
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 1rem;
+      font-family: "Prompt", sans-serif;
+      background: linear-gradient(135deg, var(--bg), #ffffff);
+      color: var(--text);
+      transition: .3s;
     }
-    .box{
-      max-width:560px;
-      margin:auto;
-      background:var(--card);
-      padding:1.8rem;
-      border-radius:26px;
-      box-shadow:0 25px 45px rgba(0,0,0,.18);
+    .box {
+      max-width: 560px;
+      margin: auto;
+      background: var(--card);
+      padding: 1.8rem;
+      border-radius: 26px;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, .18);
     }
-    .topbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .lang-switch{
-      display:flex;
-      background:rgba(255,255,255,.65);
-      backdrop-filter:blur(8px);
-      border-radius:999px;
-      padding:4px;
-      box-shadow:0 6px 20px rgba(0,0,0,.15);
+    .lang-switch {
+      display: flex;
+      background: rgba(255, 255, 255, .65);
+      backdrop-filter: blur(8px);
+      border-radius: 999px;
+      padding: 4px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .15);
     }
-    .lang-switch button{
-      border:none;
-      background:transparent;
-      padding:6px 14px;
-      border-radius:999px;
-      font-size:.75rem;
-      cursor:pointer;
-      color:var(--muted);
+    .lang-switch button {
+      border: none;
+      background: transparent;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: .75rem;
+      cursor: pointer;
+      color: var(--muted);
     }
-    .lang-switch button.active{
-      background:linear-gradient(135deg,var(--main),var(--dark));
-      color:#fff;
-      box-shadow:0 0 12px rgba(46,204,113,.6);
+    .lang-switch button.active {
+      background: linear-gradient(135deg, var(--main), var(--dark));
+      color: #fff;
+      box-shadow: 0 0 12px rgba(46, 204, 113, .6);
     }
-    .dark-toggle{
-      cursor:pointer;
-      font-size:1.1rem;
-      padding:6px 10px;
-      border-radius:50%;
+    .dark-toggle {
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 6px 10px;
+      border-radius: 50%;
     }
-    h2{text-align:center;color:var(--dark)}
-    .subtitle{text-align:center;color:var(--muted)}
-    label{display:block;margin-top:14px;font-weight:500}
-    input,select{
-      width:100%;
-      padding:14px;
-      margin-top:6px;
-      border-radius:16px;
-      border:1px solid var(--border);
-      background:var(--card);
-      color:var(--text);
+    h2 {
+      text-align: center;
+      color: var(--dark);
     }
-    button{
-      width:100%;
-      margin-top:20px;
-      padding:16px;
-      border:none;
-      border-radius:18px;
-      background:linear-gradient(135deg,var(--main),var(--dark));
-      color:#fff;
-      font-weight:600;
-      cursor:pointer;
+    .subtitle {
+      text-align: center;
+      color: var(--muted);
     }
-    button:hover{
-      box-shadow:0 0 18px rgba(46,204,113,.55);
+    label {
+      display: block;
+      margin-top: 14px;
+      font-weight: 500;
     }
-    .payment-box{
-      margin-top:22px;
-      background:#f0fdf4;
-      padding:16px;
-      border-left:6px solid var(--main);
-      border-radius:18px;
-      font-size:.9rem;
+    input, select {
+      width: 100%;
+      padding: 14px;
+      margin-top: 6px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
     }
-    body.dark .payment-box{background:#022c22}
-    #preview{
-      width:100%;
-      margin-top:14px;
-      border-radius:18px;
-      display:none;
-      border:1px dashed var(--border);
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 16px;
+      border: none;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--main), var(--dark));
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
     }
-    .contact-box{
-      margin-top:14px;
-      text-align:center;
-      font-size:.85rem;
+    button:hover {
+      box-shadow: 0 0 18px rgba(46, 204, 113, .55);
     }
-    .contact-box a{
-      color:var(--dark);
-      font-weight:500;
+    .payment-box {
+      margin-top: 22px;
+      background: #f0fdf4;
+      padding: 16px;
+      border-left: 6px solid var(--main);
+      border-radius: 18px;
+      font-size: .9rem;
+    }
+    body.dark .payment-box { background: #022c22; }
+    #preview {
+      width: 100%;
+      margin-top: 14px;
+      border-radius: 18px;
+      display: none;
+      border: 1px dashed var(--border);
+    }
+    .contact-box {
+      margin-top: 14px;
+      text-align: center;
+      font-size: .85rem;
+    }
+    .contact-box a {
+      color: var(--dark);
+      font-weight: 500;
     }
   </style>
 </head>
@@ -200,127 +209,131 @@
 </div>
 
 <script>
-// Bot Telegram Configuration
-const BOT_TOKEN = "8265712317:AAET88mDq8GFJSN9zRys1wJ4AwPQ7hmtYbI";
-const CHAT_ID  = "6678480860";
+  // Bot Telegram Configuration
+  const BOT_TOKEN = "8265712317:AAET88mDq8GFJSN9zRys1wJ4AwPQ7hmtYbI";
+  const CHAT_ID = "6678480860";
 
-// Language and Dark Mode
-let lang = localStorage.lang || "th";
-let dark = localStorage.dark === "1";
-let slipBase64 = "";
+  // Language and Dark Mode
+  let lang = localStorage.lang || "th";
+  let dark = localStorage.dark === "1";
+  let slipBase64 = "";
 
-// ⭐ ป้องกันสลิปเก่าค้าง
-sessionStorage.removeItem("slip");
+  // ⭐ ป้องกันสลิปเก่าค้าง
+  sessionStorage.removeItem("slip");
 
-function applyLang(){
-  document.querySelectorAll("[data-th]").forEach(el=>{
-    el.innerText = el.dataset[lang];
-  });
-  document.querySelectorAll("option[data-th]").forEach(opt=>{
-    opt.text = opt.dataset[lang];
-  });
-  document.querySelectorAll("[data-ph-th]").forEach(el=>{
-    el.placeholder = lang==="th" ? el.dataset.phTh : el.dataset.phEn;
-  });
-  document.querySelectorAll("[data-title-th]").forEach(el=>{
-    el.title = lang==="th" ? el.dataset.titleTh : el.dataset.titleEn;
-  });
-  btnTH.classList.toggle("active", lang==="th");
-  btnEN.classList.toggle("active", lang==="en");
-  localStorage.lang = lang;
-}
-function setLang(l){ lang=l; applyLang(); }
-
-function toggleDark(){
-  dark = !dark;
-  document.body.classList.toggle("dark", dark);
-  localStorage.dark = dark ? "1" : "0";
-}
-
-slip.addEventListener("change", e=>{
-  const file = e.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = ()=>{
-    slipBase64 = reader.result;
-    preview.src = slipBase64;
-    preview.style.display = "block";
-  };
-  reader.readAsDataURL(file);
-});
-
-// Function to send data to Telegram
-async function sendToTelegram(message) {
-  const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-  const body = {
-    chat_id: CHAT_ID,
-    text: message
-  };
-
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  };
-
-  try {
-    await fetch(url, requestOptions);
-  } catch (error) {
-    console.error("Error sending message to Telegram:", error);
-  }
-}
-
-payForm.addEventListener("submit", async e=>{
-  e.preventDefault();
-  const f = e.target;
-  const username = f.username.value.trim();
-  const last4 = f.last4.value.trim();
-
-  if(!slipBase64 && !last4){
-    alert(lang==="th"
-      ? "กรุณาอัปโหลดสลิป หรือ กรอกเลข 4 ตัวท้าย"
-      : "Please upload a slip or enter last 4 digits");
-    return;
+  function applyLang() {
+    document.querySelectorAll("[data-th]").forEach(el => {
+      el.innerText = el.dataset[lang];
+    });
+    document.querySelectorAll("option[data-th]").forEach(opt => {
+      opt.text = opt.dataset[lang];
+    });
+    document.querySelectorAll("[data-ph-th]").forEach(el => {
+      el.placeholder = lang === "th" ? el.dataset.phTh : el.dataset.phEn;
+    });
+    document.querySelectorAll("[data-title-th]").forEach(el => {
+      el.title = lang === "th" ? el.dataset.titleTh : el.dataset.titleEn;
+    });
+    btnTH.classList.toggle("active", lang === "th");
+    btnEN.classList.toggle("active", lang === "en");
+    localStorage.lang = lang;
   }
 
-  sendBtn.disabled = true;
+  function setLang(l) {
+    lang = l;
+    applyLang();
+  }
 
-  const time = new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" });
+  function toggleDark() {
+    dark = !dark;
+    document.body.classList.toggle("dark", dark);
+    localStorage.dark = dark ? "1" : "0";
+  }
 
-  try{
-    if(slipBase64){
-      sessionStorage.setItem("slip", slipBase64); // ✅ สำคัญที่สุด
+  slip.addEventListener("change", e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      slipBase64 = reader.result;
+      preview.src = slipBase64;
+      preview.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Function to send data to Telegram
+  async function sendToTelegram(message) {
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+    const body = {
+      chat_id: CHAT_ID,
+      text: message
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    };
+
+    try {
+      await fetch(url, requestOptions);
+    } catch (error) {
+      console.error("Error sending message to Telegram:", error);
+    }
+  }
+
+  payForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    const f = e.target;
+    const username = f.username.value.trim();
+    const last4 = f.last4.value.trim();
+
+    if (!slipBase64 && !last4) {
+      alert(lang === "th"
+        ? "กรุณาอัปโหลดสลิป หรือ กรอกเลข 4 ตัวท้าย"
+        : "Please upload a slip or enter last 4 digits");
+      return;
     }
 
-    localStorage.user = username;
-    localStorage.package = f.package.value;
-    localStorage.time = time;
-    localStorage.last4 = slipBase64 ? "" : last4;
+    sendBtn.disabled = true;
 
-    // ส่งข้อมูลไปยัง Telegram Bot
-    const message = `New Payment:
-    Username: ${username}
-    Package: ${f.package.options[f.package.selectedIndex].text}
-    Last 4 Digits: ${last4 || "No slip uploaded"}
-    Time: ${time}`;
+    const time = new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" });
 
-    await sendToTelegram(message); // ส่งข้อความไปยัง Telegram
+    try {
+      if (slipBase64) {
+        sessionStorage.setItem("slip", slipBase64); // ✅ สำคัญที่สุด
+      }
 
-    // ล้างข้อมูลสลิปใน sessionStorage หลังจากส่ง
-    sessionStorage.removeItem("slip");
-    slipBase64 = ""; // ล้างค่าของ slipBase64
-    preview.style.display = "none"; // ซ่อน preview ของสลิป
+      localStorage.user = username;
+      localStorage.package = f.package.value;
+      localStorage.time = time;
+      localStorage.last4 = slipBase64 ? "" : last4;
 
-    location.href = "success.html"; // เปลี่ยนไปที่หน้าสำเร็จ
+      // ส่งข้อมูลไปยัง Telegram Bot
+      const message = `New Payment:
+      Username: ${username}
+      Package: ${f.package.options[f.package.selectedIndex].text}
+      Last 4 Digits: ${last4 || "No slip uploaded"}
+      Time: ${time}`;
 
-  }catch{
-    alert("Error");
-    sendBtn.disabled = false;
-  }
-});
+      await sendToTelegram(message); // ส่งข้อความไปยัง Telegram
 
-document.body.classList.toggle("dark", dark);
-applyLang();
+      // ล้างข้อมูลสลิปใน sessionStorage หลังจากส่ง
+      sessionStorage.removeItem("slip");
+      slipBase64 = ""; // ล้างค่าของ slipBase64
+      preview.style.display = "none"; // ซ่อน preview ของสลิป
+
+      location.href = "success.html"; // เปลี่ยนไปที่หน้าสำเร็จ
+
+    } catch {
+      alert("Error");
+      sendBtn.disabled = false;
+    }
+  });
+
+  document.body.classList.toggle("dark", dark);
+  applyLang();
 </script>
 
 </body>
