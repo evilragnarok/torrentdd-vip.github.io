@@ -176,12 +176,19 @@ if(slip){
 
 /* ===== CLEAR DATA ===== */
 function clearData(){
+  // Clear Local Storage
   localStorage.removeItem("user");
   localStorage.removeItem("package");
   localStorage.removeItem("time");
   localStorage.removeItem("last4");
   localStorage.removeItem("slip");
+
+  // Clear Session Storage
   sessionStorage.removeItem("slip");
+  
+  // Clear the slip image display for future page reloads
+  slipBox.style.display = "none"; // Hide the slip box
+  payment.innerText = "-"; // Reset payment display
 }
 
 /* ===== AUTO REDIRECT ===== */
