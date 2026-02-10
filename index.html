@@ -209,10 +209,6 @@
 </div>
 
 <script>
-  // Bot Telegram Configuration
-  const BOT_TOKEN = "8265712317:AAET88mDq8GFJSN9zRys1wJ4AwPQ7hmtYbI";
-  const CHAT_ID = "6678480860";
-
   // Language and Dark Mode
   let lang = localStorage.lang || "th";
   let dark = localStorage.dark === "1";
@@ -262,27 +258,6 @@
     reader.readAsDataURL(file);
   });
 
-  // Function to send data to Telegram
-  async function sendToTelegram(message) {
-    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-    const body = {
-      chat_id: CHAT_ID,
-      text: message
-    };
-
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    };
-
-    try {
-      await fetch(url, requestOptions);
-    } catch (error) {
-      console.error("Error sending message to Telegram:", error);
-    }
-  }
-
   payForm.addEventListener("submit", async e => {
     e.preventDefault();
     const f = e.target;
@@ -309,20 +284,6 @@
       localStorage.package = f.package.value;
       localStorage.time = time;
       localStorage.last4 = slipBase64 ? "" : last4;
-
-      // ส่งข้อมูลไปยัง Telegram Bot
-      const message = `New Payment:
-      Username: ${username}
-      Package: ${f.package.options[f.package.selectedIndex].text}
-      Last 4 Digits: ${last4 || "No slip uploaded"}
-      Time: ${time}`;
-
-      await sendToTelegram(message); // ส่งข้อความไปยัง Telegram
-
-      // ล้างข้อมูลสลิปใน sessionStorage หลังจากส่ง
-      sessionStorage.removeItem("slip");
-      slipBase64 = ""; // ล้างค่าของ slipBase64
-      preview.style.display = "none"; // ซ่อน preview ของสลิป
 
       location.href = "success.html"; // เปลี่ยนไปที่หน้าสำเร็จ
 
