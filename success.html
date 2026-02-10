@@ -157,8 +157,11 @@ user.innerText    = localStorage.user    || "-";
 package.innerText = localStorage.package || "-";
 time.innerText    = localStorage.time    || "-";
 
-/* ===== PAYMENT DISPLAY LOGIC (FIXED) ===== */
-const slip = sessionStorage.slip;   // ✅ FIX
+/* ===== PAYMENT DISPLAY LOGIC (REAL FIX) ===== */
+const slip =
+  sessionStorage.getItem("slip") ||
+  localStorage.getItem("slip");   // ⭐ fallback กัน session หลุด
+
 const last4 = localStorage.last4;
 
 if(slip){
@@ -177,7 +180,8 @@ function clearData(){
   localStorage.removeItem("package");
   localStorage.removeItem("time");
   localStorage.removeItem("last4");
-  sessionStorage.removeItem("slip"); // ✅ FIX
+  localStorage.removeItem("slip");
+  sessionStorage.removeItem("slip");
 }
 
 /* ===== AUTO REDIRECT ===== */
