@@ -3,59 +3,166 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ส่งข้อมูลสำเร็จ</title>
-
-<meta http-equiv="refresh" content="10;url=index.html">
+<title>Payment Success</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --bg:#e6f7f0;
+  --card:#ffffff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --main:#2ecc71;
+  --border:#d1d5db;
+}
+body.dark{
+  --bg:#0f172a;
+  --card:#111827;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --border:#1f2937;
+}
+
 body{
-  margin:0;padding:1.5rem;
+  margin:0;
+  padding:1rem;
   font-family:"Prompt",sans-serif;
-  background:linear-gradient(135deg,#e9f7ef,#fdfefe);
+  background:linear-gradient(135deg,var(--bg),#ffffff);
+  color:var(--text);
 }
+
 .box{
-  max-width:440px;margin:auto;
-  background:#fff;padding:30px;
-  border-radius:20px;text-align:center;
-  box-shadow:0 15px 30px rgba(0,0,0,.15);
+  max-width:560px;
+  margin:auto;
+  background:var(--card);
+  padding:2rem;
+  border-radius:28px;
+  box-shadow:0 25px 45px rgba(0,0,0,.18);
+  text-align:center;
 }
+
+h2{color:var(--main)}
 .info{
-  text-align:left;margin-top:16px;
-  background:#f0fdf4;padding:14px;
-  border-radius:14px;font-size:.9rem
+  margin-top:16px;
+  text-align:left;
+  font-size:.95rem;
 }
-img{width:100%;margin-top:12px;border-radius:16px}
+.info div{margin-bottom:8px}
+
+.notice{
+  margin-top:18px;
+  padding:14px;
+  border-radius:16px;
+  background:#f0fdf4;
+  font-size:.9rem;
+}
+body.dark .notice{background:#022c22}
+
+#slipImg{
+  width:100%;
+  margin-top:14px;
+  border-radius:16px;
+  display:none;
+}
+
+.back{
+  margin-top:20px;
+  font-weight:500;
+}
+.back a{
+  color:var(--main);
+  text-decoration:none;
+}
+
+.timer{
+  margin-top:6px;
+  font-size:.8rem;
+  color:var(--muted);
+}
 </style>
-
-<script>
-let t=10;
-setInterval(()=>{t--;time.innerText=t},1000);
-
-window.onload=()=>{
-  order.innerText=localStorage.order;
-  user.innerText=localStorage.user;
-  pkg.innerText=localStorage.package;
-  date.innerText=localStorage.time;
-
-  if(localStorage.slip){
-    document.getElementById("slipImg").src=localStorage.slip;
-    document.getElementById("slipBox").style.display="block";
-  }else{
-    document.getElementById("last4").innerText=localStorage.last4;
-    document.getElementById("last4Box").style.display="block";
-  }
-};
-</script>
 </head>
 
 <body>
 
 <div class="box">
-  <h2>✅ ส่งข้อมูลเรียบร้อย</h2>
+
+  <h2 data-th="✅ ส่งข้อมูลเรียบร้อยแล้ว"
+      data-en="✅ Payment Submitted Successfully"></h2>
 
   <div class="info">
     <div><b>Order :</b> <span id="order"></span></div>
     <div><b>User :</b> <span id="user"></span></div>
-    <div><b>Pack
+    <div><b>Package :</b> <span id="package"></span></div>
+    <div><b>Time :</b> <span id="time"></span></div>
+    <div id="payInfo"></div>
+  </div>
+
+  <img id="slipImg">
+
+  <div class="notice"
+       data-th="ระบบได้รับข้อมูลเรียบร้อยแล้ว กรุณารอทีมงานตรวจสอบ และรอข้อความตอบกลับภายในเว็บไซต์ หากล่าช้าหรือกรอกข้อมูลผิด กรุณาแจ้งใน PM ผู้ดูแล"
+       data-en="Your information has been received. Please wait for our team to verify your payment. If delayed or incorrect, please contact the administrator via PM.">
+  </div>
+
+  <div class="back">
+    <a href="index.html"
+       data-th="⬅ กลับสู่หน้าแรก"
+       data-en="⬅ Back to Home"></a>
+    <div class="timer">
+      <span data-th="กลับอัตโนมัติใน"
+            data-en="Auto redirect in"></span>
+      <span id="sec">10</span>
+      <span data-th="วินาที"
+            data-en="seconds"></span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ===== LOAD STATE ===== */
+const lang = localStorage.lang || "th";
+const dark = localStorage.dark === "1";
+
+/* ===== APPLY THEME ===== */
+document.body.classList.toggle("dark", dark);
+
+/* ===== LANGUAGE ===== */
+document.querySelectorAll("[data-th]").forEach(el=>{
+  el.innerText = el.dataset[lang];
+});
+
+/* ===== LOAD DATA ===== */
+const order   = localStorage.order || "-";
+const user    = localStorage.user || "-";
+const pack    = localStorage.package || "-";
+const time    = localStorage.time || "-";
+const slip    = localStorage.slip || "";
+const last4   = localStorage.last4 || "";
+
+/* ===== DISPLAY ===== */
+orderEl.innerText   = order;
+userEl.innerText    = user;
+packageEl.innerText = pack;
+timeEl.innerText    = time;
+
+if(slip){
+  slipImg.src = slip;
+  slipImg.style.display = "block";
+  payInfo.innerHTML = "<b>Payment :</b> Slip Uploaded";
+}else{
+  payInfo.innerHTML = "<b>Payment :</b> Last 4 digits : "+last4;
+}
+
+/* ===== REDIRECT ===== */
+let sec = 10;
+setInterval(()=>{
+  sec--;
+  document.getElementById("sec").innerText = sec;
+  if(sec<=0) location.href="index.html";
+},1000);
+</script>
+
+</body>
+</html>
