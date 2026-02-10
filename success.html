@@ -37,20 +37,6 @@ body{
   line-height:1.8;
   font-size:.95rem;
 }
-.qr-box{
-  margin-top:20px;
-  background:#fff;
-  border-radius:20px;
-  padding:16px;
-  display:flex;
-  gap:12px;
-  justify-content:center;
-}
-.qr-box img{
-  width:100%;
-  max-width:220px;
-  height:auto;
-}
 .notice{
   margin-top:20px;
   background:#064e3b;
@@ -80,47 +66,82 @@ body{
 
 <div class="card">
 
-  <div class="success">✅ ส่งข้อมูลเรียบร้อยแล้ว</div>
+  <div class="success" id="title"></div>
 
   <div class="info">
-    <div><b>Order :</b> <span id="order">-</span></div>
-    <div><b>User :</b> <span id="user">-</span></div>
-    <div><b>Package :</b> <span id="package">-</span></div>
-    <div><b>Time :</b> <span id="time">-</span></div>
-    <div><b>Payment :</b> <span id="payment">-</span></div>
+    <div><b id="lblOrder"></b> <span id="order">-</span></div>
+    <div><b id="lblUser"></b> <span id="user">-</span></div>
+    <div><b id="lblPackage"></b> <span id="package">-</span></div>
+    <div><b id="lblTime"></b> <span id="time">-</span></div>
+    <div><b id="lblPayment"></b> <span id="payment">-</span></div>
   </div>
 
-  <div class="notice">
-    ระบบได้รับข้อมูลเรียบร้อยแล้ว  
-    กรุณารอทีมงานตรวจสอบ และระบบจะอัปเดตสถานะกลับในเว็บไซต์  
-    หากข้อมูลผิดพลาด กรุณาแจ้ง PM ผู้ดูแล
-  </div>
+  <div class="notice" id="notice"></div>
 
   <div class="back">
-    <a href="index.html" onclick="clearData()">← กลับหน้าแรก</a>
+    <a href="index.html" onclick="clearData()" id="backBtn"></a>
   </div>
 
   <div class="timer">
-    กลับอัตโนมัติใน <span id="sec">5</span> วินาที
+    <span id="autoText"></span> <span id="sec">10</span>
   </div>
 
 </div>
 
 <script>
-/* ===== LOAD DATA ===== */
-const data = {
-  order: localStorage.order || "-",
-  user: localStorage.user || "-",
-  package: localStorage.package || "-",
-  time: localStorage.time || "-",
-  payment: localStorage.payment || "-"
+/* ===== LANGUAGE LOCK ===== */
+const lang = localStorage.lang || "th";
+document.documentElement.lang = lang;
+
+/* ===== TRANSLATION ===== */
+const i18n = {
+  th:{
+    title:"✅ ส่งข้อมูลเรียบร้อยแล้ว",
+    order:"Order :",
+    user:"User :",
+    package:"Package :",
+    time:"Time :",
+    payment:"Payment :",
+    notice:`ระบบได้รับข้อมูลเรียบร้อยแล้ว  
+กรุณารอทีมงานตรวจสอบ และระบบจะอัปเดตสถานะกลับในเว็บไซต์  
+หากข้อมูลผิดพลาด กรุณาแจ้ง PM ผู้ดูแล`,
+    back:"← กลับหน้าแรก",
+    auto:"กลับอัตโนมัติใน"
+  },
+  en:{
+    title:"✅ Payment submitted successfully",
+    order:"Order :",
+    user:"User :",
+    package:"Package :",
+    time:"Time :",
+    payment:"Payment :",
+    notice:`Your payment information has been received.  
+Please wait for verification. Status will be updated on the website.  
+If there is any issue, please contact the administrator.`,
+    back:"← Back to homepage",
+    auto:"Auto redirect in"
+  }
 };
 
-document.getElementById("order").innerText = data.order;
-document.getElementById("user").innerText = data.user;
-document.getElementById("package").innerText = data.package;
-document.getElementById("time").innerText = data.time;
-document.getElementById("payment").innerText = data.payment;
+const t = i18n[lang];
+
+/* ===== APPLY TEXT ===== */
+title.innerText = t.title;
+lblOrder.innerText = t.order;
+lblUser.innerText = t.user;
+lblPackage.innerText = t.package;
+lblTime.innerText = t.time;
+lblPayment.innerText = t.payment;
+notice.innerText = t.notice;
+backBtn.innerText = t.back;
+autoText.innerText = t.auto;
+
+/* ===== LOAD DATA ===== */
+order.innerText   = localStorage.order   || "-";
+user.innerText    = localStorage.user    || "-";
+package.innerText = localStorage.package || "-";
+time.innerText    = localStorage.time    || "-";
+payment.innerText = localStorage.payment || "-";
 
 /* ===== CLEAR DATA ===== */
 function clearData(){
