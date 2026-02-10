@@ -183,16 +183,19 @@
   </form>
 
   <div class="payment-box">
-    <div style="text-align:center;margin-bottom:16px">
-      <img src="https://s1.imgbb.ws/file/storage-sv1/giVH2.png" style="width:100%;max-width:320px;border-radius:18px">
-      <div style="font-size:.8rem;color:var(--muted)" data-th="สแกนเพื่อชำระเงิน" data-en="Scan to pay"></div>
-    </div>
-    <div><b>Bank :</b> Krungthai Bank</div>
-    <div><b>Account :</b> 986-3-03446-0</div>
-    <div><b>PromptPay :</b> 0910541671</div>
-    <div><b>TrueWallet :</b> 0830439347</div>
-    <div><b>Name :</b> Akrapong Pengrod</div>
+  <div style="text-align:center;margin-bottom:16px">
+    <img src="https://s1.imgbb.ws/file/storage-sv1/giVH2.png" style="width:100%;max-width:320px;border-radius:18px">
+    <div style="font-size:.8rem;color:var(--muted)" data-th="สแกนเพื่อชำระเงิน" data-en="Scan to pay"></div>
   </div>
+  <div>
+    <b>💳 Bank:</b> Krungthai Bank <br>
+    <b>🏦 Account:</b> 986-3-03446-0 <br>
+    <b>📱 PromptPay:</b> 0910541671 <br>
+    <b>💸 TrueWallet:</b> 0830439347 <br>
+    <b>📝 Name:</b> Akrapong Pengrod
+  </div>
+</div>
+
 
   <div class="contact-box">
     📩 Contact :
@@ -293,7 +296,7 @@ payForm.addEventListener("submit", async e => {
   const time = new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" });
 
   if (!slipFile && !last4) {
-    alert("กรุณาอัปโหลดสลิป หรือ กรอกเลข 4 ตัวท้าย");
+    alert(getMessage("pleaseUploadOrEnter"));
     return;
   }
 
@@ -315,9 +318,9 @@ payForm.addEventListener("submit", async e => {
     await sendToTelegram(message, slipFile);
 
     // Show alert with countdown message
-    alert("ข้อมูลของคุณได้ถูกส่งเรียบร้อยแล้ว!!");
+    alert(getMessage("submittedSuccess"));
 
-    // Reset the form and page after 1 seconds
+    // Reset the form and page after 5 seconds
     setTimeout(() => {
       payForm.reset();
       preview.style.display = "none";
@@ -327,9 +330,26 @@ payForm.addEventListener("submit", async e => {
     }, 1000);
 
   } catch (error) {
-    alert("Error sending payment data");
+    alert(getMessage("error"));
   }
 });
+
+// Function to get alert messages based on language
+function getMessage(key) {
+  const messages = {
+    th: {
+      pleaseUploadOrEnter: "กรุณาอัปโหลดสลิป หรือ กรอกเลข 4 ตัวท้าย",
+      submittedSuccess: "ข้อมูลของคุณได้ถูกส่งเรียบร้อยแล้ว  !!!",
+      error: "เกิดข้อผิดพลาดในการส่งข้อมูล"
+    },
+    en: {
+      pleaseUploadOrEnter: "Please upload the slip or enter the last 4 digits",
+      submittedSuccess: "Your information has been submitted successfully. !!!",
+      error: "Error submitting data"
+    }
+  };
+  return messages[lang][key];
+}
 
 document.body.classList.toggle("dark", dark);
 applyLang();
