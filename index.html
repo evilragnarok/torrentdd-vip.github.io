@@ -312,7 +312,7 @@ payForm.addEventListener("submit", async e=>{
 
   sendBtn.disabled = true;
 
-  const time = new Date().toLocaleString(lang==="th"?"th-TH":"en-US");
+  const time = new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" });
 
   try{
     if(slipBase64){
