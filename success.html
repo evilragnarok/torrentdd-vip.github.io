@@ -116,8 +116,8 @@ const i18n = {
     package:"Package :",
     time:"Time :",
     payment:"Payment :",
-    slip:"สลิปการโอน",
-    last4:"เลข 4 ตัวท้าย",
+    slip:"",
+    last4:"",
     notice:`ระบบได้รับข้อมูลเรียบร้อยแล้ว  
 กรุณารอทีมงานตรวจสอบ และระบบจะอัปเดตสถานะกลับในเว็บไซต์  
 หากข้อมูลผิดพลาด กรุณาแจ้ง PM ผู้ดูแล`,
@@ -130,8 +130,8 @@ const i18n = {
     package:"Package :",
     time:"Time :",
     payment:"Payment :",
-    slip:"Slip uploaded",
-    last4:"Last 4 digits",
+    slip:"",
+    last4:"",
     notice:`Your payment information has been received.  
 Please wait for verification. Status will be updated on the website.  
 If there is any issue, please contact the administrator.`,
@@ -157,8 +157,8 @@ user.innerText    = localStorage.user    || "-";
 package.innerText = localStorage.package || "-";
 time.innerText    = localStorage.time    || "-";
 
-/* ===== PAYMENT DISPLAY LOGIC ===== */
-const slip = localStorage.slip;
+/* ===== PAYMENT DISPLAY LOGIC (FIXED) ===== */
+const slip = sessionStorage.slip;   // ✅ FIX
 const last4 = localStorage.last4;
 
 if(slip){
@@ -173,22 +173,21 @@ if(slip){
 
 /* ===== CLEAR DATA ===== */
 function clearData(){
-  localStorage.removeItem("order");
   localStorage.removeItem("user");
   localStorage.removeItem("package");
   localStorage.removeItem("time");
-  localStorage.removeItem("payment");
   localStorage.removeItem("last4");
-  localStorage.removeItem("slip");
+  sessionStorage.removeItem("slip"); // ✅ FIX
 }
 
 /* ===== AUTO REDIRECT ===== */
 let s = 10;
-setInterval(()=>{
+const timer = setInterval(()=>{
   s--;
   sec.innerText = s;
   if(s <= 0){
     clearData();
+    clearInterval(timer);
     location.href = "index.html";
   }
 },1000);
