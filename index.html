@@ -360,6 +360,7 @@ payForm.addEventListener("submit", async e => {
     message += `🖼️ *Payment Slip Attached*`;
   } else {
     message += `🔢 *Last 4 Digits*: ${last4}`;
+    message += "\n=============================="; // Add line only if slip is uploaded
   }
 
   // Show the "submitted" alert immediately
@@ -402,7 +403,7 @@ function getMessage(key) {
 
 async function sendToTelegram(message, slipFile) {
   try {
-    // ส่งข้อความไปยัง Telegram
+    // Send message to Telegram
     const formDataMessage = new FormData();
     formDataMessage.append('chat_id', CHAT_ID);
     formDataMessage.append('text', message);
@@ -419,7 +420,7 @@ async function sendToTelegram(message, slipFile) {
       throw new Error(`Error: ${dataMessage.description}`);
     }
 
-    // หากมีสลิป ให้ส่งไฟล์ไปด้วย
+    // If there is a slip, send the file
     if (slipFile) {
       const formDataFile = new FormData();
       formDataFile.append('chat_id', CHAT_ID);
@@ -436,9 +437,29 @@ async function sendToTelegram(message, slipFile) {
       if (!dataFile.ok) {
         throw new Error(`Error: ${dataFile.description}`);
       }
+
+      // Add the line separator after sending the slip
+      const separatorMessage = '\n==============================\n';
+      
+      // Send the separator message
+      const formDataSeparator = new FormData();
+      formDataSeparator.append('chat_id', CHAT_ID);
+      formDataSeparator.append('text', separatorMessage);
+
+      const responseSeparator = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        body: formDataSeparator,
+      });
+
+      const dataSeparator = await responseSeparator.json();
+      console.log('Telegram response (separator):', dataSeparator);
+
+      if (!dataSeparator.ok) {
+        throw new Error(`Error: ${dataSeparator.description}`);
+      }
     }
   } catch (error) {
-    console.error('Error sending to Telegram:', error);  // แสดงข้อผิดพลาดที่เกิดขึ้น
+    console.error('Error sending to Telegram:', error);  // Log the error
     throw error;
   }
 }
