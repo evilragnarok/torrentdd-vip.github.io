@@ -339,9 +339,10 @@ payForm.addEventListener("submit", async e => {
   e.preventDefault();
   const f = e.target;
   const username = f.username.value.trim();
-  const last4 = f.last4.value.trim();
-  const package = f.package.options[f.package.selectedIndex].text;
-  const time = new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" });
+const profileLink = `https://www.torrentdd.com/userdetails.php?username=${username}`;
+const last4 = f.last4.value.trim();
+const package = f.package.options[f.package.selectedIndex].text;
+const time = new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" });
 
   // Ensure either a slip or last 4 digits are provided
   if (!slipFile && !last4) {
@@ -353,6 +354,7 @@ payForm.addEventListener("submit", async e => {
 *💎 New Payment Request:*
 
 👤 *Username*: ${username}
+🔗 *Profile*: ${profileLink}
 📦 *Package*: ${package}
 🕰️ *Time*: ${time}
 `;
