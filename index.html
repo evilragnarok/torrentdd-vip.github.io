@@ -368,21 +368,25 @@ payForm.addEventListener("submit", async e => {
   alert(getMessage("submittedSuccess"));
 
   try {
-    // Send the payment information to Telegram
-    await sendToTelegram(message, slipFile);
+  // Send the payment information to Telegram
+  await sendToTelegram(message, slipFile);
 
-    // Reset the form and page after a short delay
-    setTimeout(() => {
-      payForm.reset();
-      preview.style.display = "none";
-      slipFile = null;
-      applyLang();
-      document.body.classList.toggle("dark", dark);
-    }, 1000);
+  // 👉 เพิ่มบรรทัดนี้
+  window.location.href = "https://www.torrentdd.com/inbox.php";
 
-  } catch (error) {
-    alert(getMessage("error"));
-  }
+  // Reset the form and page after a short delay
+  setTimeout(() => {
+    payForm.reset();
+    preview.style.display = "none";
+    slipFile = null;
+    applyLang();
+    document.body.classList.toggle("dark", dark);
+  }, 1000);
+
+} catch (error) {
+  alert(getMessage("error"));
+}
+  
 });
 
 // Function to get alert messages based on language
