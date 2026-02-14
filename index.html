@@ -270,7 +270,7 @@
 
   <div class="contact-box">
     📩 Contact :
-    <a href="https://www.torrentdd.com/sendmessage.php?receiver=973308" target="_blank">3vilr4gn4r0k</a>
+    <a href="https://www.torrentdd.net/sendmessage.php?receiver=973308" target="_blank">3vilr4gn4r0k</a>
     <div data-th="🕰️ เวลาทำการ: 8:00 น. - 00:00 น. (เวลาไทย)
     ⏰ หลังเวลา 00:01 น. - 7:59 น. หากอยู่ จะส่งให้ทันที
     ⏰ ถ้าไม่อยู่ จะส่งให้ในเวลาทำการ"
@@ -339,7 +339,7 @@ payForm.addEventListener("submit", async e => {
   e.preventDefault();
   const f = e.target;
   const username = f.username.value.trim();
-const profileLink = `https://www.torrentdd.com/userdetails.php?username=${username}`;
+const profileLink = `https://www.torrentdd.net/userdetails.php?username=${username}`;
 const last4 = f.last4.value.trim();
 const package = f.package.options[f.package.selectedIndex].text;
 const time = new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" });
@@ -374,7 +374,7 @@ const time = new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" });
   await sendToTelegram(message, slipFile);
 
   // 👉 เพิ่มบรรทัดนี้
-  window.location.href = "https://www.torrentdd.com/inbox.php";
+  window.location.href = "https://www.torrentdd.net/inbox.php";
 
   // Reset the form and page after a short delay
   setTimeout(() => {
