@@ -351,7 +351,21 @@ payForm.addEventListener("submit", async e => {
   e.preventDefault();
   const f = e.target;
   const username = f.username.value.trim();
-const profileLink = `https://www.torrentdd.net/userdetails.php?username=${username}`;
+
+// เรียก backend หา id
+const res = await fetch(`get_userid.php?username=${username}`);
+const data = await res.json();
+
+if (data.status !== "success") {
+  alert("ไม่พบ username");
+  return;
+}
+
+const userId = data.id;
+
+const profileLink = `https://www.torrentdd.net/userdetails.php?id=${userId}`;
+const messageLink = `https://www.torrentdd.net/sendmessage.php?receiver=${userId}`;
+
 const last4 = f.last4.value.trim();
 const package = f.package.options[f.package.selectedIndex].text;
 const time = new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" });
@@ -363,19 +377,21 @@ const time = new Date().toLocaleString("th-TH", { timeZone: "Asia/Bangkok" });
   }
 
   let message = `
-*💎 New Payment Request:*
-
-👤 *Username*: ${username}
-🔗 *Profile*: ${profileLink}
-📦 *Package*: ${package}
-🕰️ *Time*: ${time}
+╔══════════════════════════════════╗
+   💎 NEW VIP PAYMENT REQUEST 💎
+╚══════════════════════════════════╝
+👤 *Username*    : ${username}
+🔗 *Profile*     : ${profileLink}
+📩 *Send Message*: ${messageLink}
+📦 *Package*     : ${package}
+🕰️ *Time*        : ${time}
 `;
 
   if (slipFile) {
-    message += `🖼️ *Payment Slip Attached*`;
+    message += `📎 *Payment Slip Attached*`;
   } else {
     message += `🔢 *Last 4 Digits*: ${last4}`;
-    message += "\n=============================="; // Add line only if slip is uploaded
+    message += "\n═══════════════════════════════════════════"; // Add line only if slip is uploaded
   }
 
   // Show the "submitted" alert immediately
