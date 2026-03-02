@@ -280,7 +280,9 @@
     <button id="sendBtn" data-th="✅ แจ้งชำระเงิน" data-en="✅ Submit Payment"></button>
   </form>
 
- <div 
+<div class="contact-box">
+
+<div 
     data-en="<h3>📩 Contact Information</h3>"
     data-th="<h3>📩 ช่องทางติดต่อ</h3>">
 </div>
@@ -291,23 +293,23 @@
 </div>
 
 <div 
-    data-en='📩 The LINE group is open for contact if you
-                      haven&#39;t received your code key yet. <br>
-      <img src="https://s2.imgbb.ws/file/storage-sv2/FKSuk.jpg" alt="Line Open Chat QR">'
+    data-en='📩 The LINE group is open for contact if you haven&#39;t received your code key yet. <br>
+    <img src="https://s2.imgbb.ws/file/storage-sv2/FKSuk.jpg" alt="Line Open Chat QR">'
     data-th='📩 กลุ่มไลน์ เปิด ใช้เพื่อติดต่อถ้ายังไม่ได้ Code Key <br>
-      <img src="https://s2.imgbb.ws/file/storage-sv2/FKSuk.jpg" alt="Line Open Chat QR">'>
+    <img src="https://s2.imgbb.ws/file/storage-sv2/FKSuk.jpg" alt="Line Open Chat QR">'>
+</div>
 
-      <div data-th="🕰️ เวลาทำการ: 8:00 น. - 00:00 น. (เวลาไทย)
-    ⏰ หลังเวลา 00:01 น. - 7:59 น. หากอยู่ จะส่งให้ทันที
+<div 
+    data-th="🕰️ เวลาทำการ: 8:00 น. - 00:00 น. (เวลาไทย)<br>
+    ⏰ หลังเวลา 00:01 น. - 7:59 น. หากอยู่ จะส่งให้ทันที<br>
     ⏰ ถ้าไม่อยู่ จะส่งให้ในเวลาทำการ"
-         data-en="
-         🕰️ Working Hours: 8:00 AM - 00:00 AM (Thailand Time)
-         ⏰ After 00:01 AM - 7:59 AM, if you are available, we will send it to you.
-         If not, we will process it during working hours.
-         ⏰ We will send it to you. If not, we will process it during working hours.
-         "></div>
-  </div>
+    data-en="🕰️ Working Hours: 8:00 AM - 00:00 AM (Thailand Time)<br>
+    ⏰ After 00:01 AM - 7:59 AM, if you are available, we will send it to you.<br>
+    If not, we will process it during working hours.<br>
+    ⏰ We will send it to you. If not, we will process it during working hours.">
+</div>
 
+</div>
 <script>
 // Bot Telegram Configuration
 const BOT_TOKEN = "8265712317:AAET88mDq8GFJSN9zRys1wJ4AwPQ7hmtYbI";
@@ -320,7 +322,7 @@ let slipFile = null;
 
 function applyLang() {
   document.querySelectorAll("[data-th]").forEach(el => {
-    el.innerText = el.dataset[lang];
+    el.innerHTML = el.dataset[lang];
   });
   document.querySelectorAll("option[data-th]").forEach(opt => {
     opt.text = opt.dataset[lang];
